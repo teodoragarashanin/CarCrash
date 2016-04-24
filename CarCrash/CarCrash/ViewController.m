@@ -43,6 +43,13 @@
     
     [UIView commitAnimations];
 }
+-(void)setFrame {
+    CGRect myFrame =self.carImageView.frame;
+    myFrame.origin.x = self.lampImageView.frame.origin.x;
+    self.carImageView.frame = myFrame;
+
+
+}
 
 #pragma mark - Timer
 
@@ -63,7 +70,8 @@
     if((self.carImageView.frame.origin.x > -1150.0) || (CGRectIntersectsRect(self.carImageView.frame,self.lampImageView.frame)) ) {
     [self playSound];
     [self stopTimer];
-    //    self.carImageView.frame.origin.x=self.lampImageView.frame.origin.x;
+    [self setFrame];
+       // [self.carImageView.frame.origin.x setFrame];
     double delayInSeconds = 3.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
